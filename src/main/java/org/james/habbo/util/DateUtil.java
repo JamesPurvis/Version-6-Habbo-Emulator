@@ -1,9 +1,12 @@
 package org.james.habbo.util;
 
+import java.text.DecimalFormat;
+
 public class DateUtil {
 
-    public static long returnTimeElapsed(long timeStart)
+    public static String returnTimeElapsed(long timeStart)
     {
-        return System.currentTimeMillis() - timeStart;
+        DecimalFormat mFormat = new DecimalFormat("#.#");
+        return mFormat.format((System.nanoTime() - timeStart) / 1e6);
     }
 }
