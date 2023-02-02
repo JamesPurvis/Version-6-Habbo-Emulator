@@ -1,17 +1,24 @@
 
 package org.james.habbo;
+import org.apache.logging.log4j.core.config.Configurator;
+import org.apache.logging.log4j.core.config.DefaultConfiguration;
 import org.james.habbo.avatars.AvatarServiceImpl;
 import org.james.habbo.configuration.ConfigurationFile;
 import org.james.habbo.habbohotel.Hotel;
 import org.james.habbo.util.DateUtil;
+import org.apache.logging.log4j.*;
 
 public class Emulator {
 
 
     private static long mStartUpTime = 0;
+    private static Logger mLogger = LogManager.getLogger(Emulator.class.getName());
 
     public static void main(String[] args)
     {
+        Configurator.initialize(new DefaultConfiguration());
+        Configurator.setRootLevel(Level.INFO);
+
         mStartUpTime = System.nanoTime();
 
         printHeader();
@@ -29,12 +36,12 @@ public class Emulator {
         }
         catch(Exception e)
         {
-            System.out.println("The emulator failed to start: " + e.getMessage());
+            mLogger.error("The emulator failed to start: " + e.getMessage());
             return;
         }
 
 
-        System.out.println("The emulator has finished starting in " + DateUtil.returnTimeElapsed(mStartUpTime) + "ms!");
+        mLogger.info("The emulator has finished starting in " + DateUtil.returnTimeElapsed(mStartUpTime) + "ms!");
     }
 
     public static void printHeader()
@@ -45,6 +52,7 @@ public class Emulator {
         System.out.println("##########################################################################");
         System.out.println(" ");
         System.out.println("The emulator is starting...");
+        System.out.println(" ");
     }
 
 

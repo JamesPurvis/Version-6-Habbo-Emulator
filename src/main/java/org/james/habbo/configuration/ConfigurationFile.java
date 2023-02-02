@@ -1,5 +1,8 @@
 package org.james.habbo.configuration;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.*;
 import java.io.FileNotFoundException;
 import java.lang.module.Configuration;
@@ -13,6 +16,8 @@ public class ConfigurationFile
     private File mConfigFile = null;
     private HashMap<String, String> mProperties = null;
 
+    private static Logger mLogger = LogManager.getLogger(ConfigurationFile.class.getName());
+
     private boolean mIsLoaded = false;
 
     public ConfigurationFile(String FilePath)
@@ -22,7 +27,7 @@ public class ConfigurationFile
         try {
             loadConfigurationFile();
         } catch (FileNotFoundException e) {
-            System.out.println("server.configuration file is missing! Please check your setup and try again.");
+            mLogger.error("server.configuration file is missing! Please check your setup and try again.");
         }
     }
 
@@ -55,7 +60,7 @@ public class ConfigurationFile
 
         mScanner.close();
 
-        System.out.println("Configuration file has been loaded successfully!");
+        mLogger.info("Configuration file has been loaded successfully!");
         mIsLoaded = true;
 
 
