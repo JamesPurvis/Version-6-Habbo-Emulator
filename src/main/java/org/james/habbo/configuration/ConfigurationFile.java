@@ -1,31 +1,73 @@
 package org.james.habbo.configuration;
 
+import java.io.*;
 import java.io.FileNotFoundException;
 import java.lang.module.Configuration;
+import java.util.HashMap;
+import java.util.Scanner;
 
 public class ConfigurationFile
 {
 
     private static ConfigurationFile mInstance = null;
+    private File mConfigFile = null;
+    private HashMap<String, String> mProperties = null;
+
+    private boolean mIsLoaded = false;
+
     public ConfigurationFile(String FilePath)
     {
-        try
-        {
+        mConfigFile = new File(FilePath);
 
-        }
-        catch(Exception e)
-        {
-            System.out.println("Unable to find configuration, check your emulator setup and try again.");
+        try {
+            loadConfigurationFile();
+        } catch (FileNotFoundException e) {
+            System.out.println("server.configuration file is missing! Please check your setup and try again.");
         }
     }
 
-    public static ConfigurationFile getInstance(String filePath)
+    public static ConfigurationFile getInstance()
     {
         if (mInstance == null)
         {
-            mInstance = new ConfigurationFile(filePath);
+            mInstance = new ConfigurationFile("/Users/andypurvis/IdeaProjects/Version6Habbo/src/main/resources/server.configuration");
         }
 
         return mInstance;
+    }
+
+
+    private void loadConfigurationFile() throws FileNotFoundException {
+        Scanner mScanner = new Scanner(mConfigFile);
+        mProperties = new HashMap<String, String>();
+
+        while(mScanner.hasNextLine())
+        {
+           String mLine = mScanner.nextLine();
+
+           if (!mLine.isBlank())
+           {
+               String mPropertyHeader = mLine.split("=")[0];
+               String mPropertyValue = mLine.split("=")[1];
+               mProperties.put(mPropertyHeader, mPropertyValue);
+           }
+        }
+
+        mScanner.close();
+
+        System.out.println("Configuration file has been loaded successfully!");
+        mIsLoaded = true;
+
+
+    }
+
+    public HashMap<String, String> returnPropBox()
+    {
+        return mProperties;
+    }
+
+    public boolean isLoaded()
+    {
+        return mIsLoaded;
     }
 }

@@ -16,13 +16,18 @@ public class Emulator {
 
         printHeader();
 
+        ConfigurationFile.getInstance();
+
         try
         {
-            ConfigurationFile.getInstance("");
+            if (ConfigurationFile.getInstance().isLoaded())
+            {
+
+            }
         }
         catch(Exception e)
         {
-            System.out.println("The emulator failed to start!");
+            System.out.println("The emulator failed to start: " + e.getMessage());
             return;
         }
 
