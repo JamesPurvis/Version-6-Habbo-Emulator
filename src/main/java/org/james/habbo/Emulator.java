@@ -1,14 +1,14 @@
 
 package org.james.habbo;
+import org.james.habbo.avatars.AvatarServiceImpl;
 import org.james.habbo.configuration.ConfigurationFile;
+import org.james.habbo.habbohotel.Hotel;
 import org.james.habbo.util.DateUtil;
 
 public class Emulator {
 
 
     private static long mStartUpTime = 0;
-    private static ConfigurationFile mConfigFile = null;
-
 
     public static void main(String[] args)
     {
@@ -22,6 +22,8 @@ public class Emulator {
         {
             if (ConfigurationFile.getInstance().isLoaded())
             {
+                Hotel.getInstance();
+                AvatarServiceImpl.getInstance();
 
             }
         }
