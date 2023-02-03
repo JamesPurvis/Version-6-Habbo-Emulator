@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+<persistence-unit name="AvatarEntity">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <class>org.james.habbo.avatars.AvatarEntity</class>
+
+    <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver" />
+            <property name="hibernate.connection.username" value="root" />
+            <property name="hibernate.connection.password" value=""/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://127.0.0.1/emulator" />
+    </properties>
+
+</persistence-unit>
+</persistence>

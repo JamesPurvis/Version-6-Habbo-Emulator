@@ -15,8 +15,8 @@ public class DatabaseManager
 
     public void createRepositories()
     {
-        EntityManagerFactory mAvatarFactory = Persistence.createEntityManagerFactory("AvatarEntity");
-        AvatarRepositoryImpl.getInstance(mAvatarFactory.createEntityManager());
+       EntityManagerFactory mAvatarFactory = Persistence.createEntityManagerFactory("AvatarEntity");
+       AvatarRepositoryImpl.getInstance(mAvatarFactory.createEntityManager());
 
         mLogger.info("Entity Repositories created successfully!");
     }
