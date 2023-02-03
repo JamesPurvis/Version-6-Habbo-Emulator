@@ -1,9 +1,18 @@
 package org.james.habbo.avatars;
 
+import jakarta.persistence.EntityManager;
+
 import java.util.HashMap;
 
 public class AvatarRepositoryImpl implements AvatarRepository
 {
+
+    private EntityManager mManager = null;
+    private static AvatarRepositoryImpl mInstance = null;
+    public AvatarRepositoryImpl(EntityManager instance)
+    {
+        mManager = instance;
+    }
 
     @Override
     public AvatarEntity getAvatarById(int id) {
@@ -28,5 +37,15 @@ public class AvatarRepositoryImpl implements AvatarRepository
     @Override
     public void deleteAvatar(String userName) {
 
+    }
+
+    public static AvatarRepositoryImpl getInstance(EntityManager m)
+    {
+        if (mInstance == null)
+        {
+            mInstance = new AvatarRepositoryImpl(m);
+        }
+
+        return mInstance;
     }
 }

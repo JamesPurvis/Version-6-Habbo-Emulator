@@ -1,0 +1,20 @@
+<persistence-unit name="AvatarEntity">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <class>org.james.habbo.avatars.AvatarEntity</class>
+
+    <properties>
+        <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
+        <property name="hibernate.dialect">	org.hibernate.dialect.MySQL5Dialect</property>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">newnew99</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/emulator?useSSL=false</property>
+
+        <property name="connection_pool_size">1</property>
+
+        <property name="hbm2ddl.auto">create</property>
+
+        <property name="show_sql">true</property>
+
+        <mapping class="org.james.habbo.avatars.AvatarEntity"/>
+    </properties></persistence-unit>
