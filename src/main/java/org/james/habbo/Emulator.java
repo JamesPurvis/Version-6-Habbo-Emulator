@@ -2,8 +2,8 @@
 package org.james.habbo;
 import org.apache.logging.log4j.core.config.Configurator;
 import org.apache.logging.log4j.core.config.DefaultConfiguration;
-import org.james.habbo.avatars.AvatarServiceImpl;
 import org.james.habbo.configuration.ConfigurationFile;
+import org.james.habbo.database.DatabaseManager;
 import org.james.habbo.habbohotel.Hotel;
 import org.james.habbo.util.DateUtil;
 import org.apache.logging.log4j.*;
@@ -30,7 +30,7 @@ public class Emulator {
             if (ConfigurationFile.getInstance().isLoaded())
             {
                 Hotel.getInstance();
-                AvatarServiceImpl.getInstance();
+                DatabaseManager.getInstance().createRepositories();
 
             }
         }
