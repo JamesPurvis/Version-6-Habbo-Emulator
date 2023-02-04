@@ -66,9 +66,9 @@ public class ConfigurationFile
 
     }
 
-    public HashMap<String, String> returnPropBox()
+    public String returnProperty(String header)
     {
-        return mProperties;
+        return mProperties.get(header);
     }
 
     public boolean isLoaded()

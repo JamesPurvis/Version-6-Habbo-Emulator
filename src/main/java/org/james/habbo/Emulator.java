@@ -7,6 +7,7 @@ import org.james.habbo.database.DatabaseManager;
 import org.james.habbo.habbohotel.Hotel;
 import org.james.habbo.util.DateUtil;
 import org.apache.logging.log4j.*;
+import org.james.habbo.net.*;
 
 public class Emulator {
 
@@ -31,6 +32,8 @@ public class Emulator {
             {
                 Hotel.getInstance();
                 DatabaseManager.getInstance().createRepositories();
+                Server.getInstance().createSocket();
+                Server.getInstance().bind();
 
             }
         }

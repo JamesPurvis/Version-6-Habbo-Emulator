@@ -27,7 +27,7 @@ public class Hotel
     {
         if (mInstance == null)
         {
-            mInstance = new Hotel(Integer.parseInt(ConfigurationFile.getInstance().returnPropBox().get("hotel.version")));
+            mInstance = new Hotel(Integer.parseInt(ConfigurationFile.getInstance().returnProperty("hotel.version")));
         }
 
         return mInstance;

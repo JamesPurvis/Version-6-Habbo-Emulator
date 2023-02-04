@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.james.habbo.avatars.AvatarEntity;
 import org.james.habbo.avatars.AvatarRepositoryImpl;
 
 public class DatabaseManager
@@ -15,8 +16,7 @@ public class DatabaseManager
 
     public void createRepositories()
     {
-       EntityManagerFactory mAvatarFactory = Persistence.createEntityManagerFactory("AvatarEntity");
-       AvatarRepositoryImpl.getInstance(mAvatarFactory.createEntityManager());
+        AvatarRepositoryImpl.getInstance(returnEntityManager("AvatarEntity"));
 
         mLogger.info("Entity Repositories created successfully!");
     }
@@ -29,5 +29,11 @@ public class DatabaseManager
         }
 
         return mInstance;
+    }
+
+    private EntityManager returnEntityManager(String unit)
+    {
+        EntityManagerFactory mFactory = Persistence.createEntityManagerFactory(unit);
+        return mFactory.createEntityManager();
     }
 }
