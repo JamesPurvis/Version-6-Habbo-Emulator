@@ -11,10 +11,9 @@ public class GameSessionFactory
     private static Logger mLogger = LogManager.getLogger(GameSessionFactory.class.getName());
     private static GameSessionFactory mInstance;
 
-    private AtomicInteger mConnectedClientCount;
+    private AtomicInteger mConnectedClientCount = new AtomicInteger();
     public GameSessionFactory()
     {
-
         mLogger.info("Session manager instantiated successfully.");
     }
 

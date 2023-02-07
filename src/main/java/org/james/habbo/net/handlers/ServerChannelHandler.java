@@ -23,6 +23,7 @@ public class ServerChannelHandler extends SimpleChannelInboundHandler<String>
         GameSession mSession = GameSessionFactory.getInstance().createNewSession(ctx.channel());
          ctx.channel().attr(AttributeKey.valueOf("Session")).set(mSession);
         mLogger.info("Client " + mSession.ID() + " " + "[" + mSession.IPtoString() + "] " + "has connected to the server.");
+        mSession.Hello();
     }
 
     @Override

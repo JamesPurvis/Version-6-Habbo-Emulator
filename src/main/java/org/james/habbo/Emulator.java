@@ -5,6 +5,7 @@ import org.apache.logging.log4j.core.config.DefaultConfiguration;
 import org.james.habbo.configuration.ConfigurationFile;
 import org.james.habbo.database.DatabaseManager;
 import org.james.habbo.habbohotel.Hotel;
+import org.james.habbo.messages.ReactorService;
 import org.james.habbo.net.session.GameSessionFactory;
 import org.james.habbo.util.DateUtil;
 import org.apache.logging.log4j.*;
@@ -36,6 +37,7 @@ public class Emulator {
                 DatabaseManager.getInstance().createRepositories();
                 Server.getInstance().createSocket();
                 Server.getInstance().bind();
+                ReactorService.getInstance().loadIntialReactors();
 
             }
         }
