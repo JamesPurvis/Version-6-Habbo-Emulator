@@ -16,7 +16,7 @@ public class DatabaseManager
 
     public void createRepositories()
     {
-        AvatarRepositoryImpl.getInstance(returnEntityManager("AvatarEntity"));
+        AvatarRepositoryImpl.getInstance().setEntityManager(returnEntityManager("AvatarEntity"));
 
         mLogger.info("Entity Repositories created successfully!");
     }

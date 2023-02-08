@@ -40,11 +40,11 @@ public class ServerDecoder extends ByteToMessageDecoder
             return;
         }
 
-        Request HabboRequest = new Request(input, mLength);
+        Request HabboRequest = new Request(input.readBytes(mLength));
 
-        mLogger.info("[RECV] " + "[" + HabboRequest.ID() + "] " + "[" + HabboRequest.toString() + "]");
+       mLogger.info("[RECV] " + "[" + HabboRequest.Header() + "] " + "[" + HabboRequest.contents() + "]");
 
-        ReactorService.getInstance().invokeReactor(HabboRequest, (GameSession)ctx.attr(AttributeKey.valueOf("Session")).get());
+       ReactorService.getInstance().invokeReactor(HabboRequest, (GameSession)ctx.attr(AttributeKey.valueOf("Session")).get());
 
         list.add(HabboRequest);
 
