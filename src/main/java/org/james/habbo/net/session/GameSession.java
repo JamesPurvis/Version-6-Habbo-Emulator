@@ -4,6 +4,8 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import org.apache.logging.log4j.LogManager;
 import org.james.habbo.avatars.AvatarEntity;
+import org.james.habbo.messages.types.MessageComposer;
+import org.james.habbo.messages.types.Response;
 import org.james.habbo.util.StringUtil;
 import org.apache.logging.log4j.*;
 
@@ -47,10 +49,14 @@ public class GameSession
         this.mSessionID = sessionID;
     }
 
-    public void Hello()
-    {
-        mChannel.writeAndFlush(Unpooled.copiedBuffer(StringUtil.getEncoding().encode("@@" + (char)1)));
+    public void Hello() {
+        mChannel.writeAndFlush(Unpooled.copiedBuffer(StringUtil.getEncoding().encode("@@"  + (char) 1)));
         mLogger.info("Client[" + IPtoString() + "] " + "said hello!");
 
+    }
+
+    public void sendToSession(Object o)
+    {
+        this.mChannel.writeAndFlush(o);
     }
 }
