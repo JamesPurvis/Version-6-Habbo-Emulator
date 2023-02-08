@@ -48,7 +48,7 @@ public class AvatarRepositoryImpl implements AvatarRepository
     @Override
     public boolean avatarExists(String Name) {
 
-        return findByName(Name).isEmpty();
+        return !findByName(Name).isEmpty();
     }
 
     @Override

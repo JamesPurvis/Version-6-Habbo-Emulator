@@ -11,11 +11,11 @@ public class StringUtil
     }
 
 
-    public static boolean filterWords(String name)
+    public static boolean filterName(String name)
     {
         for(String word : returnBadWords())
         {
-            if (name.toLowerCase().contains(word.toLowerCase()))
+            if (name.toLowerCase().contains(word.toLowerCase()) || name.toLowerCase().startsWith("admin") || name.toLowerCase().startsWith("mod"))
             {
                 return false;
             }
@@ -29,8 +29,6 @@ public class StringUtil
         return new String[] {
                 "SHIT",
                 "BITCH",
-                "ADMIN",
-                "MOD",
                 "Administrator",
                 "Moderator",
         };

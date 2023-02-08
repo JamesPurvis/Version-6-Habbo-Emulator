@@ -3,6 +3,7 @@ package org.james.habbo.messages;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.james.habbo.messages.incoming.global.CheckVersionMessageEvent;
+import org.james.habbo.messages.incoming.global.FindUserMessageEvent;
 import org.james.habbo.messages.incoming.global.GetAvaliableSetsMessageEvent;
 import org.james.habbo.messages.incoming.global.GetDateMessageEvent;
 import org.james.habbo.messages.incoming.register.ApproveNameMessageEvent;
@@ -28,6 +29,7 @@ public class ReactorService
         mReactors.put(9, new GetAvaliableSetsMessageEvent());
         mReactors.put(49, new GetDateMessageEvent());
         mReactors.put(42, new ApproveNameMessageEvent());
+        mReactors.put(41, new FindUserMessageEvent());
     }
 
     public void invokeReactor(Request Request, GameSession session)

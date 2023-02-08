@@ -14,7 +14,7 @@ public class ApproveNameMessageEvent implements MessageEvent {
     @Override
     public void invokeEvent(Request request, GameSession session) {
 
-        if (StringUtil.filterWords(request.popString()))
+        if (StringUtil.filterName(request.popString()))
         {
             session.sendToSession(new HandleNameApprovedComposer());
         }
