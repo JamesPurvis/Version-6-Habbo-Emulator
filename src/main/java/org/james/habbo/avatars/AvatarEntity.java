@@ -35,6 +35,9 @@ public class AvatarEntity {
     @Column(name = "film")
     private int film;
 
+    @Column(name = "credits")
+    private int credits;
+
     @Column(name = "sex")
     private char sex;
 
@@ -110,6 +113,8 @@ public class AvatarEntity {
         return film;
     }
 
+    public int getCredits() { return credits; }
+
     public void setFilm(int film) {
         this.film = film;
     }
@@ -121,6 +126,8 @@ public class AvatarEntity {
     public void setSex(char sex) {
         this.sex = sex;
     }
+
+    public void setCredits(int credits) { this.credits = credits; }
 
     public String getPool_figure() {
         return pool_figure;

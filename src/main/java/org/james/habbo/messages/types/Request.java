@@ -44,8 +44,7 @@ public class Request
         return new String(mData, StringUtil.getEncoding());
     }
 
-    public int popInteger()
-    {
+    public int popInteger() {
         byte[] remaining = this.remainingBytes();
         int length = remaining[0] >> 3 & 7;
         int value = WireEncoding.decode(remaining);
@@ -53,6 +52,10 @@ public class Request
         return value;
     }
 
+    public boolean popBoolean()
+    {
+        return popInteger() == 1;
+    }
     public byte[] remainingBytes()
     {
         this.mBuffer.markReaderIndex();

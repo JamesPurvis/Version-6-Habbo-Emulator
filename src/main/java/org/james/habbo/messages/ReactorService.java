@@ -7,6 +7,7 @@ import org.james.habbo.messages.incoming.global.FindUserMessageEvent;
 import org.james.habbo.messages.incoming.global.GetAvaliableSetsMessageEvent;
 import org.james.habbo.messages.incoming.global.GetDateMessageEvent;
 import org.james.habbo.messages.incoming.register.ApproveNameMessageEvent;
+import org.james.habbo.messages.incoming.register.RegisterMessageEvent;
 import org.james.habbo.messages.types.MessageEvent;
 
 import java.util.HashMap;
@@ -30,6 +31,7 @@ public class ReactorService
         mReactors.put(49, new GetDateMessageEvent());
         mReactors.put(42, new ApproveNameMessageEvent());
         mReactors.put(41, new FindUserMessageEvent());
+        mReactors.put(43, new RegisterMessageEvent());
     }
 
     public void invokeReactor(Request Request, GameSession session)

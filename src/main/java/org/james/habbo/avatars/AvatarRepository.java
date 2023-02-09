@@ -8,7 +8,7 @@ public interface AvatarRepository
 {
     AvatarEntity getAvatarById(int id);
     List<AvatarEntity> findByName(String userName);
-    AvatarEntity createNewAvatar(HashMap<Integer, String> propertiesMap);
+    AvatarEntity createNewAvatar(HashMap<Integer, Object> propertiesMap);
     boolean avatarExists(String Name);
     void deleteAvatar(int id);
     void deleteAvatar(String userName);

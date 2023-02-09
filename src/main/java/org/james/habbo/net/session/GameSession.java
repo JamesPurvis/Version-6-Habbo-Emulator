@@ -43,6 +43,12 @@ public class GameSession
         return mChannel;
     }
 
+
+    public void setAvatar(AvatarEntity instance)
+    {
+        this.mAvatarInstance = instance;
+    }
+
     public GameSession(Channel c, long sessionID)
     {
         this.mChannel = c;
