@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.james.habbo.avatars.AvatarEntity;
 import org.james.habbo.avatars.AvatarRepositoryImpl;
+import org.james.habbo.navigator.repo.NavigatorRepositoryImpl;
 
 public class DatabaseManager
 {
@@ -17,6 +18,7 @@ public class DatabaseManager
     public void createRepositories()
     {
         AvatarRepositoryImpl.getInstance().setEntityManager(returnEntityManager("AvatarEntity"));
+        NavigatorRepositoryImpl.getInstance().setRoomEntityManager(returnEntityManager("RoomEntity"));
 
         mLogger.info("Entity Repositories created successfully!");
     }

@@ -4,6 +4,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.mapping.Property;
 
@@ -13,6 +15,8 @@ import java.util.HashMap;
 
 public class AvatarRepositoryImpl implements AvatarRepository
 {
+
+    private static Logger mLogger = LogManager.getLogger(AvatarRepositoryImpl.class.getName());
 
     private EntityManager mManager = null;
     private static AvatarRepositoryImpl mInstance = null;
@@ -33,37 +37,17 @@ public class AvatarRepositoryImpl implements AvatarRepository
     }
 
     @Override
-    public List<AvatarEntity> findByName(String userName) {
+    public AvatarEntity findByName(String userName) {
 
         CriteriaBuilder cb = mManager.getCriteriaBuilder();
         CriteriaQuery<AvatarEntity> criteria = cb.createQuery(AvatarEntity.class);
         Root<AvatarEntity> root = criteria.from(AvatarEntity.class);
         criteria.where(cb.equal(root.get("username"), userName));
-        return mManager.createQuery(criteria).getResultList();
+        return mManager.createQuery(criteria).getSingleResult();
     }
 
     @Override
-    public AvatarEntity createNewAvatar(HashMap<Integer, Object> PropertyBox) {
-
-        /*  pRegMsgStruct["parentagree"] = [#id: 1, "type": #boolean]
-        pRegMsgStruct["name"] = [#id: 2, "type": #string]
-        pRegMsgStruct["password"] = [#id: 3, "type": #string]
-        pRegMsgStruct["figure"] = [#id: 4, "type": #string]
-        pRegMsgStruct["sex"] = [#id: 5, "type": #string]
-        pRegMsgStruct["customData"] = [#id: 6, "type": #string]
-        pRegMsgStruct["email"] = [#id: 7, "type": #string]
-        pRegMsgStruct["birthday"] = [#id: 8, "type": #string]
-        pRegMsgStruct["directMail"] = [#id: 9, "type": #boolean]
-        pRegMsgStruct["has_read_agreement"] = [#id: 10, "type": #boolean]
-        pRegMsgStruct["isp_id"] = [#id: 11, "type": #string]
-        pRegMsgStruct["partnersite"] = [#id: 12, "type": #string]
-        pRegMsgStruct["oldpassword"] = [#id: 13, "type": #string]
-        registerMessage(#enterRoom, me.getID(), #closeFigureCreator)
-        registerMessage(#changeRoom, me.getID(), #closeFigureCreator)
-        registerMessage(#leaveRoom, me.getID(), #closeFigureCreator)
-        registerMessage(#show_registration, me.getID(), #openFigureCreator)
-        registerMessage(#hide_registration, me.getID(), #closeFigureCreator)
-        registerMessage(#figure_ready, me.getID(), #figureSystemReady) */
+    public void createNewAvatar(HashMap<Integer, Object> PropertyBox) {
 
         AvatarEntity mNewAvatar = new AvatarEntity();
 
@@ -82,14 +66,14 @@ public class AvatarRepositoryImpl implements AvatarRepository
         mManager.persist(mNewAvatar);
         mManager.getTransaction().commit();
 
-        return mNewAvatar;
+        mLogger.info(mNewAvatar.getUsername() + " " + "has registered on the client!");
 
     }
 
     @Override
     public boolean avatarExists(String Name) {
 
-        return !findByName(Name).isEmpty();
+        return findByName(Name) == null;
     }
 
     @Override
@@ -100,6 +84,14 @@ public class AvatarRepositoryImpl implements AvatarRepository
     @Override
     public void deleteAvatar(String userName) {
 
+    }
+
+    public boolean tryLogin(String username, String password)
+    {
+        username = username.toLowerCase();
+        password = password.toLowerCase();
+
+        return findByName(username).getPassword().toLowerCase().equals(password);
     }
 
     public static AvatarRepositoryImpl getInstance()

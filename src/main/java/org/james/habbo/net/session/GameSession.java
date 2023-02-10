@@ -2,6 +2,7 @@ package org.james.habbo.net.session;
 
 import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
+import io.netty.util.AttributeKey;
 import org.apache.logging.log4j.LogManager;
 import org.james.habbo.avatars.AvatarEntity;
 import org.james.habbo.messages.types.MessageComposer;
@@ -15,17 +16,11 @@ public class GameSession
 {
     private static Logger mLogger = LogManager.getLogger(GameSession.class.getName());
     private long mSessionID;
-    private AvatarEntity mAvatarInstance;
     private Channel mChannel;
 
     public long ID()
     {
         return mSessionID;
-    }
-
-    public AvatarEntity AvatarInstance()
-    {
-        return mAvatarInstance;
     }
 
     public SocketAddress IP()
@@ -43,10 +38,9 @@ public class GameSession
         return mChannel;
     }
 
-
-    public void setAvatar(AvatarEntity instance)
+    public AvatarEntity getAvatar()
     {
-        this.mAvatarInstance = instance;
+        return (AvatarEntity) Channel().attr(AttributeKey.valueOf("Avatar")).get();
     }
 
     public GameSession(Channel c, long sessionID)
