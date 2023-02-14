@@ -19,6 +19,7 @@ public class DatabaseManager
     {
         AvatarRepositoryImpl.getInstance().setEntityManager(returnEntityManager("AvatarEntity"));
         NavigatorRepositoryImpl.getInstance().setRoomEntityManager(returnEntityManager("RoomEntity"));
+        NavigatorRepositoryImpl.getInstance().setCategoryEntityManager(returnEntityManager("CategoryEntity"));
 
         mLogger.info("Entity Repositories created successfully!");
     }

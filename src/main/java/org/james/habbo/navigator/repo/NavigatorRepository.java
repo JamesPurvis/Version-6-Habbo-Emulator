@@ -7,11 +7,13 @@ import java.util.List;
 
 public interface NavigatorRepository {
 
-    List<RoomEntity> findRoomsByCategory(int categoryID);
-    List<CategoryEntity> findSubCategories(int categoryID);
+    List<RoomEntity> findRoomsByCategory(long categoryID);
+
+    CategoryEntity findCategoryById(long categoryID);
+    List<CategoryEntity> findSubCategories(long categoryID);
     List<RoomEntity> findRoomsByOwner(String userName);
     RoomEntity findRoomById(Long roomID);
-    int findRoomCountByCategory(int categoryID);
+    int findRoomCountByCategory(long categoryID);
     Long createNewRoom(String roomName, String room_model, String door, boolean showOwne, String roomOwner);
 
     void SetFlatInfo(Long roomID, String desc, String pass, boolean allsuper);

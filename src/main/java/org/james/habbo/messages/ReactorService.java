@@ -9,6 +9,7 @@ import org.james.habbo.messages.incoming.global.GetDateMessageEvent;
 import org.james.habbo.messages.incoming.login.GetCreditsMessageEvent;
 import org.james.habbo.messages.incoming.login.GetInfoMessageEvent;
 import org.james.habbo.messages.incoming.login.TryLoginMessageEvent;
+import org.james.habbo.messages.incoming.navigator.NavigateMessageEvent;
 import org.james.habbo.messages.incoming.navigator.SearchUserFlatMessageEvent;
 import org.james.habbo.messages.incoming.navigator.SetFlatInfoMessageEvent;
 import org.james.habbo.messages.incoming.register.ApproveNameMessageEvent;
@@ -44,6 +45,7 @@ public class ReactorService
         mReactors.put(29, new CreateRoomMessageEvent());
         mReactors.put(25, new SetFlatInfoMessageEvent());
         mReactors.put(16, new SearchUserFlatMessageEvent());
+        mReactors.put(150, new NavigateMessageEvent());
     }
 
     public void invokeReactor(Request Request, GameSession session)

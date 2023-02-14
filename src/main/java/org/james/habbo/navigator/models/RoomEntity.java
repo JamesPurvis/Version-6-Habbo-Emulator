@@ -21,9 +21,6 @@ public class RoomEntity {
     @Column(name = "flat_owner")
     private String flat_owner;
 
-    @Column(name = "flat_marker")
-    private String flat_marker;
-
     @Column(name = "flat_name")
     private String flat_name;
 
@@ -36,38 +33,29 @@ public class RoomEntity {
     @Column(name = "flat_trading_enabled")
     private Boolean flat_trading_enabled;
 
-    @Column(name = "flat_alert")
-    private boolean flat_alert;
-
     @Column(name = "flat_category_id")
     private int flat_category_id;
 
     @Column(name = "flat_active_users")
     private int flat_active_users;
 
-    @Column(name = "flat_port")
-    private boolean flat_port;
-
-    @Column(name = "password")
+    @Column(name = "flat_password")
     private String flat_password;
+
+    @Column(name = "flat_cct")
+    private String flat_cct;
+
+    @Column(name = "flat_model")
+    private String flat_model;
+
 
     public String getFlat_password() {
         return flat_password;
     }
 
+
     public void setFlat_password(String flat_password) {
         this.flat_password = flat_password;
-    }
-
-    @Column(name = "flat_model")
-    private String flat_model;
-
-    public String getFlat_model() {
-        return flat_model;
-    }
-
-    public void setFlat_model(String flat_model) {
-        this.flat_model = flat_model;
     }
 
     public Long getFlat_id() {
@@ -102,14 +90,6 @@ public class RoomEntity {
         this.flat_owner = flat_owner;
     }
 
-    public String getFlat_marker() {
-        return flat_marker;
-    }
-
-    public void setFlat_marker(String flat_marker) {
-        this.flat_marker = flat_marker;
-    }
-
     public String getFlat_name() {
         return flat_name;
     }
@@ -142,14 +122,6 @@ public class RoomEntity {
         this.flat_trading_enabled = flat_trading_enabled;
     }
 
-    public boolean isFlat_alert() {
-        return flat_alert;
-    }
-
-    public void setFlat_alert(boolean flat_alert) {
-        this.flat_alert = flat_alert;
-    }
-
     public int getFlat_category_id() {
         return flat_category_id;
     }
@@ -159,19 +131,28 @@ public class RoomEntity {
     }
 
     public int getFlat_active_users() {
+
         return flat_active_users;
     }
 
     public void setFlat_active_users(int flat_active_users) {
+
         this.flat_active_users = flat_active_users;
     }
 
-
-    public boolean isFlat_port() {
-        return flat_port;
+    public String getFlat_cct() {
+        return flat_cct;
     }
 
-    public void setFlat_port(boolean flat_port) {
-        this.flat_port = flat_port;
+    public void setFlat_cct(String flat_cct) {
+        this.flat_cct = flat_cct;
+    }
+
+    public String getFlat_model() {
+        return flat_model;
+    }
+
+    public void setFlat_model(String flat_model) {
+        this.flat_model = flat_model;
     }
 }

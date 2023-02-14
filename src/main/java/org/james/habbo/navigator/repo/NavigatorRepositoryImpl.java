@@ -16,18 +16,35 @@ public class NavigatorRepositoryImpl implements NavigatorRepository{
 
     private static NavigatorRepositoryImpl mInstance;
     private static Logger mLogger = LogManager.getLogger(NavigatorRepositoryImpl.class.getName());
-    private EntityManager mNavigatorEntityManager;
+    private EntityManager mCategoryEntityManager;
     private EntityManager mRoomEntityManager;
 
 
     @Override
-    public List<RoomEntity> findRoomsByCategory(int categoryID) {
-        return null;
+    public List<RoomEntity> findRoomsByCategory(long categoryID) {
+        CriteriaBuilder cb = mRoomEntityManager.getCriteriaBuilder();
+        CriteriaQuery<RoomEntity> criteria = cb.createQuery(RoomEntity.class);
+        Root<RoomEntity> root = criteria.from(RoomEntity.class);
+        criteria.where(cb.equal(root.get("flat_category_id"), categoryID));
+        return mCategoryEntityManager.createQuery(criteria).getResultList();
     }
 
     @Override
-    public List<CategoryEntity> findSubCategories(int categoryID) {
-        return null;
+    public CategoryEntity findCategoryById(long categoryID) {
+        CriteriaBuilder cb = mCategoryEntityManager.getCriteriaBuilder();
+        CriteriaQuery<CategoryEntity> criteria = cb.createQuery(CategoryEntity.class);
+        Root<CategoryEntity> root = criteria.from(CategoryEntity.class);
+        criteria.where(cb.equal(root.get("id"), categoryID));
+        return mCategoryEntityManager.createQuery(criteria).getSingleResult();
+    }
+
+    @Override
+    public List<CategoryEntity> findSubCategories(long categoryID) {
+        CriteriaBuilder cb = mCategoryEntityManager.getCriteriaBuilder();
+        CriteriaQuery<CategoryEntity> criteria = cb.createQuery(CategoryEntity.class);
+        Root<CategoryEntity> root = criteria.from(CategoryEntity.class);
+        criteria.where(cb.equal(root.get("parent_id"), categoryID));
+        return mCategoryEntityManager.createQuery(criteria).getResultList();
     }
 
     @Override
@@ -42,7 +59,6 @@ public class NavigatorRepositoryImpl implements NavigatorRepository{
 
     @Override
     public RoomEntity findRoomById(Long roomID) {
-
         CriteriaBuilder cb = mRoomEntityManager.getCriteriaBuilder();
         CriteriaQuery<RoomEntity> criteria = cb.createQuery(RoomEntity.class);
         Root<RoomEntity> root = criteria.from(RoomEntity.class);
@@ -51,8 +67,8 @@ public class NavigatorRepositoryImpl implements NavigatorRepository{
     }
 
     @Override
-    public int findRoomCountByCategory(int categoryID) {
-        return 0;
+    public int findRoomCountByCategory(long categoryID) {
+        return findRoomsByCategory(categoryID).size();
     }
 
     @Override
@@ -97,9 +113,9 @@ public class NavigatorRepositoryImpl implements NavigatorRepository{
         return mInstance;
     }
 
-    public void setNavigatorEntityManager(EntityManager instance)
+    public void setCategoryEntityManager(EntityManager instance)
     {
-        mNavigatorEntityManager = instance;
+        mCategoryEntityManager = instance;
     }
 
     public void setRoomEntityManager(EntityManager instance)
