@@ -13,13 +13,22 @@ public class SetFlatInfoMessageEvent implements MessageEvent {
     @Override
     public void invokeEvent(Request request, GameSession session) {
 
-            String[] mRoomLines = request.contents().split(Character.toString((char)13));
+        try {
+
+
+            String[] mRoomLines = request.contents().split(Character.toString((char) 13));
+
             Long mRoomID = Long.parseLong(mRoomLines[0].split("/")[1]);
-            String mRoomDescription = mRoomLines[1].split("=")[1];
-            String mRoomPassword = mRoomLines[2].split("=")[1];
-            boolean mRoomSuper = mRoomLines[3].split("=")[1].equals("1");
+            String mRoomDescription = mRoomLines[1].replace("description=", "");
+            String mRoomPassword = mRoomLines[2].replace("password=", "");
+            boolean mRoomSuper = mRoomLines[3].replace("allsuperuser=", "").equals("1");
 
             NavigatorRepositoryImpl.getInstance().SetFlatInfo(mRoomID, mRoomDescription, mRoomPassword, mRoomSuper);
+        }
+        catch(Exception e)
+        {
+            mLogger.info(e.getMessage());
+        }
 
     }
 }
