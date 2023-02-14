@@ -8,6 +8,10 @@ import java.util.List;
 public interface NavigatorRepository {
 
     List<RoomEntity> findRoomsByCategory(long categoryID);
+    void UpdateFlatInfo(Long roomID, String name, String door, boolean showname);
+
+    void SetFlatCat(Long roomID, int categoryID);
+    List<CategoryEntity> returnFlatCats();
 
     CategoryEntity findCategoryById(long categoryID);
     List<CategoryEntity> findSubCategories(long categoryID);

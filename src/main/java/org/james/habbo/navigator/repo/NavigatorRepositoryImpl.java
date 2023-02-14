@@ -29,6 +29,15 @@ public class NavigatorRepositoryImpl implements NavigatorRepository{
         return mCategoryEntityManager.createQuery(criteria).getResultList();
     }
 
+    public List<CategoryEntity> returnFlatCats()
+    {
+        CriteriaBuilder cb = mCategoryEntityManager.getCriteriaBuilder();
+        CriteriaQuery<CategoryEntity> criteria = cb.createQuery(CategoryEntity.class);
+        Root<CategoryEntity> root = criteria.from(CategoryEntity.class);
+        criteria.where(cb.equal(root.get("parent_id"), 4));
+        return mCategoryEntityManager.createQuery(criteria).getResultList();
+    }
+
     @Override
     public CategoryEntity findCategoryById(long categoryID) {
         CriteriaBuilder cb = mCategoryEntityManager.getCriteriaBuilder();
@@ -97,6 +106,28 @@ public class NavigatorRepositoryImpl implements NavigatorRepository{
         mRoom.setFlat_description(desc);
         mRoom.setFlat_super_rights(allsuper);
         mRoom.setFlat_password(pass);
+
+        mRoomEntityManager.getTransaction().begin();
+        mRoomEntityManager.persist(mRoom);
+        mRoomEntityManager.getTransaction().commit();
+    }
+
+    public void UpdateFlatInfo(Long roomID, String name, String door, boolean showname)
+    {
+        RoomEntity mRoom = findRoomById(roomID);
+        mRoom.setFlat_name(name);
+        mRoom.setFlat_door(door);
+        mRoom.setFlat_show_owner(showname);
+
+        mRoomEntityManager.getTransaction().begin();
+        mRoomEntityManager.persist(mRoom);
+        mRoomEntityManager.getTransaction().commit();
+    }
+
+    @Override
+    public void SetFlatCat(Long roomID, int categoryID) {
+        RoomEntity mRoom = findRoomById(roomID);
+        mRoom.setFlat_category_id(categoryID);
 
         mRoomEntityManager.getTransaction().begin();
         mRoomEntityManager.persist(mRoom);

@@ -44,6 +44,10 @@ public class ReactorService
         mReactors.put(16, new SearchUserFlatMessageEvent());
         mReactors.put(150, new NavigateMessageEvent());
         mReactors.put(21, new GetFlatInfoMessageEvent());
+        mReactors.put(152, new GetFlatCatMessageEvent());
+        mReactors.put(151, new GetUserFlatCatsMessageEvent());
+        mReactors.put(24, new UpdateFlatMessageEvent());
+        mReactors.put(153, new SetFlatCatMessageEvent());
     }
 
     public void invokeReactor(Request Request, GameSession session)

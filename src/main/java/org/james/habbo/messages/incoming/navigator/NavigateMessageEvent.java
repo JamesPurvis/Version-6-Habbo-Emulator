@@ -12,4 +12,11 @@ public class NavigateMessageEvent implements MessageEvent {
         long mCategoryID = request.popInteger();
         session.sendToSession(new NavNodeInfoMessageComposer(mCategoryID));
     }
+
+    public static class GetUserFlatCatsMessageEvent implements MessageEvent {
+        @Override
+        public void invokeEvent(Request request, GameSession session) {
+
+        }
+    }
 }
